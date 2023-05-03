@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <fileVersion>2</fileVersion>
+    <fileChecksum>551236969</fileChecksum>
+    <configuration>
+        <name>CoordinatorEB</name>
+        <outputs>
+            <file>$PROJ_DIR$\..\Source\OSAL_SampleLight.c</file>
+            <file>$PROJ_DIR$\..\Source\zcl_samplelight.h</file>
+            <file>$PROJ_DIR$\..\Source\zcl_samplelight.c</file>
+            <file>$PROJ_DIR$\..\Source\zcl_samplelight_data.c</file>
+            <file>$PROJ_DIR$\..\..\..\..\..\Components\hal\common\hal_drivers.c</file>
+            <file>$PROJ_DIR$\..\..\..\..\..\Components\hal\common\hal_assert.c</file>
+            <file>$PROJ_DIR$\..\..\..\..\..\Components\stack\af\AF.h</file>
+            <file>$PROJ_DIR$\..\..\..\..\..\Components\stack\zcl\zcl_diagnostic.h</file>
+            <file>$PROJ_DIR$\..\..\Source\zcl_ha.c</file>
+            <file>$PROJ_DIR$\..\..\..\..\..\Components\stack\zcl\zcl_green_power.c</file>
+            <file>$PROJ_DIR$\..\..\..\..\..\Components\stack\zcl\zcl_general.h</file>
+            <file>$PROJ_DIR$\..\..\Source\zcl_ha.h</file>
+            <file>$PROJ_DIR$\..\..\..\..\..\Components\stack\zcl\zcl_diagnostic.c</file>
+            <file>$PROJ_DIR$\..\..\..\..\..\Components\stack\af\AF.c</file>
+            <file>$PROJ_DIR$\..\..\..\..\..\Components\stack\zcl\zcl.h</file>
+            <file>$PROJ_DIR$\..\..\..\..\..\Components\stack\zcl\zcl.c</file>
+            <file>$PROJ_DIR$\..\..\..\..\..\Components\stack\zcl\zcl_general.c</file>
+            <file>$PROJ_DIR$\..\..\..\..\..\Components\stack\zcl\zcl_green_power.h</file>
+        </outputs>
+    </configuration>
+    <configuration>
+        <name>EndDeviceEB</name>
+        <outputs />
+        <forcedrebuild>
+            <name>[MULTI_TOOL]</name>
+            <tool>XLINK</tool>
+        </forcedrebuild>
+    </configuration>
+    <configuration>
+        <name>RouterEB</name>
+        <outputs />
+        <forcedrebuild>
+            <name>[MULTI_TOOL]</name>
+            <tool>XLINK</tool>
+        </forcedrebuild>
+    </configuration>
+</project>
