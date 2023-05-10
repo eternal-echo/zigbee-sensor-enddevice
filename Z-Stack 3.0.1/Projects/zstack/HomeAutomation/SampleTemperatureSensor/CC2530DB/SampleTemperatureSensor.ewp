@@ -2623,7 +2623,7 @@
                 </option>
                 <option>
                     <name>OGChipConfigPath</name>
-                    <state>$TOOLKIT_DIR$\config\devices\Texas Instruments\CC2530F256.i51</state>
+                    <state>C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\8051\bin\..\config\devices\Texas Instruments\CC25xx\3x\CC2530F256.i51</state>
                 </option>
             </data>
         </settings>
@@ -2859,6 +2859,13 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\Components\stack\zdo</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Components\zmac</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Components\zmac\f8w</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Components\hal\target\CC2530EB\Common</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Components\hal\target\CC2530EB\SPI</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Components\hal\target\CC2530EB\HW_LCD\Font</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Components\hal\target\CC2530EB\HW_LCD\HAL_LCD_SPI</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Components\hal\target\CC2530EB\HW_LCD\HAL_OLED</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Components\hal\target\CC2530EB\HW_LCD\HAL_TFT</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Components\hal\target\CC2530EB\HW_DHT11</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
