@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"D:\softwares\IAR10101\common\bin\cspybat" -f "F:\tmp\ZB-Master\《ZigBee3.0开发止指南》配套资源（附加部分）\课外篇：进阶选修\TemperatureSensor工程源码分析\Z-Stack 3.0.1\Projects\zstack\HomeAutomation\SampleTemperatureSensor\CC2530DB\settings\SampleTemperatureSensor.EndDeviceEB.general.xcl" --backend -f "F:\tmp\ZB-Master\《ZigBee3.0开发止指南》配套资源（附加部分）\课外篇：进阶选修\TemperatureSensor工程源码分析\Z-Stack 3.0.1\Projects\zstack\HomeAutomation\SampleTemperatureSensor\CC2530DB\settings\SampleTemperatureSensor.EndDeviceEB.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "D:\embeded\project\postgraduate\monitor\Firmware\zigbee-module\Z-Stack 3.0.1\Projects\zstack\HomeAutomation\SampleTemperatureSensor\CC2530DB\settings\SampleTemperatureSensor.EndDeviceEB.general.xcl" --backend -f "D:\embeded\project\postgraduate\monitor\Firmware\zigbee-module\Z-Stack 3.0.1\Projects\zstack\HomeAutomation\SampleTemperatureSensor\CC2530DB\settings\SampleTemperatureSensor.EndDeviceEB.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"D:\softwares\IAR10101\common\bin\cspybat" -f "F:\tmp\ZB-Master\《ZigBee3.0开发止指南》配套资源（附加部分）\课外篇：进阶选修\TemperatureSensor工程源码分析\Z-Stack 3.0.1\Projects\zstack\HomeAutomation\SampleTemperatureSensor\CC2530DB\settings\SampleTemperatureSensor.EndDeviceEB.general.xcl" "--debug_file=%~1" --backend -f "F:\tmp\ZB-Master\《ZigBee3.0开发止指南》配套资源（附加部分）\课外篇：进阶选修\TemperatureSensor工程源码分析\Z-Stack 3.0.1\Projects\zstack\HomeAutomation\SampleTemperatureSensor\CC2530DB\settings\SampleTemperatureSensor.EndDeviceEB.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "D:\embeded\project\postgraduate\monitor\Firmware\zigbee-module\Z-Stack 3.0.1\Projects\zstack\HomeAutomation\SampleTemperatureSensor\CC2530DB\settings\SampleTemperatureSensor.EndDeviceEB.general.xcl" "--debug_file=%~1" --backend -f "D:\embeded\project\postgraduate\monitor\Firmware\zigbee-module\Z-Stack 3.0.1\Projects\zstack\HomeAutomation\SampleTemperatureSensor\CC2530DB\settings\SampleTemperatureSensor.EndDeviceEB.driver.xcl" 
 
 @echo off 
 :end

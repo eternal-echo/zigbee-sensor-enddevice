@@ -40,7 +40,7 @@
 
 "-p" 
 
-"D:\softwares\IAR10101\8051\config\devices\Texas Instruments\ioCC2530F256.ddf" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\8051\config\devices\Texas Instruments\ioCC2530F256.ddf" 
 
 "--proc_exclude_exit_breakpoint" 
 
