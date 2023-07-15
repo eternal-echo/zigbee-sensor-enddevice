@@ -164,6 +164,7 @@ static uint8 zclSampleTemperatureSensor_ProcessInReportCmd( zclIncomingMsg_t *pI
 
 static void zclSampleTemperatureSensor_GetAndReport(void);
 static void zclSampleTemperatureSensor_ReportTemp(int16 tempVal);
+static void zclSampleTemperatureSensor_ReportHumidity(int16 humidityVal);
 
 /*********************************************************************
  * STATUS STRINGS
@@ -230,8 +231,7 @@ void zclSampleTemperatureSensor_Init( byte task_id )
 
   // Register the application's attribute list
   zclSampleTemperatureSensor_ResetAttributesToDefaultValues();
-  zcl_registerAttrList( SAMPLETEMPERATURESENSOR_ENDPOINT, zclSampleTemperatureSensor_NumAttributes, zclSampleTemperatureSensor_Attrs );   
-
+  zcl_registerAttrList( SAMPLETEMPERATURESENSOR_ENDPOINT, zclSampleTemperatureSensor_NumAttributes, zclSampleTemperatureSensor_Attrs );
   // Register the Application to receive the unprocessed Foundation command/response messages
   zcl_registerForMsg( zclSampleTemperatureSensor_TaskID );
 
@@ -248,6 +248,9 @@ void zclSampleTemperatureSensor_Init( byte task_id )
   bdb_RepAddAttrCfgRecordDefaultToList(SAMPLETEMPERATURESENSOR_ENDPOINT, 
                                        ZCL_CLUSTER_ID_MS_TEMPERATURE_MEASUREMENT, 
                                        ATTRID_MS_TEMPERATURE_MEASURED_VALUE, 0, 10, reportableChange);
+  bdb_RepAddAttrCfgRecordDefaultToList(SAMPLETEMPERATURESENSOR_ENDPOINT, 
+                                        ZCL_CLUSTER_ID_MS_RELATIVE_HUMIDITY,
+                                       ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE, 0, 10, reportableChange);
 #endif
   
   zdpExternalStateTaskID = zclSampleTemperatureSensor_TaskID;
@@ -708,6 +711,12 @@ static uint8 zclSampleTemperatureSensor_ProcessInReportCmd( zclIncomingMsg_t *pI
         int16 temp = *((uint16 *)reportCmd->attrList[i].attrData);
         HalLcdWriteStringValue("Rx Temp:", temp, 10, 4);
     }
+    else if( pInMsg->clusterId == ZCL_CLUSTER_ID_MS_RELATIVE_HUMIDITY &&
+        reportCmd->attrList[i].attrID == ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE)
+    {
+        int16 temp = *((uint16 *)reportCmd->attrList[i].attrData);
+        HalLcdWriteStringValue("Rx Humi:", temp, 10, 4);
+    }
   }
 
   return ( TRUE );
@@ -732,11 +741,18 @@ static void zclSampleTemperatureSensor_GetAndReport(void)
     if(dat.ok)
     {
       HalLcdWriteStringValue("Temp:", dat.temp, 10, 3);
+      HalLcdWriteStringValue("Hum:", dat.humi, 10, 4);
       
-      if(zclSampleTemperatureSensor_MeasuredValue == ((int16)dat.temp * 100))
+      if(zclSampleTemperatureSensor_Temp_MeasuredValue == ((int16)dat.temp * 100) &&
+         zclSampleTemperatureSensor_Humidity_MeasuredValue == ((int16)dat.humi * 100))
         return;
       
-      zclSampleTemperatureSensor_MeasuredValue = (int16)dat.temp * 100;
+      zclSampleTemperatureSensor_Temp_MeasuredValue = (int16)dat.temp * 100;
+      zclSampleTemperatureSensor_Humidity_MeasuredValue = (int16)dat.humi * 100;
+
+      if(zclSampleTemperatureSensor_Temp_MeasuredValue == ((int16)dat.temp * 100) &&
+         zclSampleTemperatureSensor_Humidity_MeasuredValue == ((int16)dat.humi * 100))
+        return;
     }
     else
     {
@@ -745,29 +761,30 @@ static void zclSampleTemperatureSensor_GetAndReport(void)
       return;
     }
   
-    if( zclSampleTemperatureSensor_MeasuredValue > zclSampleTemperatureSensor_MaxMeasuredValue )
+    if( zclSampleTemperatureSensor_Temp_MeasuredValue > zclSampleTemperatureSensor_Temp_MaxMeasuredValue )
     {
-      zclSampleTemperatureSensor_MeasuredValue = zclSampleTemperatureSensor_MaxMeasuredValue;
+      zclSampleTemperatureSensor_Temp_MeasuredValue = zclSampleTemperatureSensor_Temp_MaxMeasuredValue;
     }
-    else if ( zclSampleTemperatureSensor_MeasuredValue < zclSampleTemperatureSensor_MinMeasuredValue )
+    else if ( zclSampleTemperatureSensor_Temp_MeasuredValue < zclSampleTemperatureSensor_Temp_MinMeasuredValue )
     {
-      zclSampleTemperatureSensor_MeasuredValue = zclSampleTemperatureSensor_MinMeasuredValue;
+      zclSampleTemperatureSensor_Temp_MeasuredValue = zclSampleTemperatureSensor_Temp_MinMeasuredValue;
+    }
+
+    if( zclSampleTemperatureSensor_Humidity_MeasuredValue > zclSampleTemperatureSensor_Humidity_MaxMeasuredValue )
+    {
+      zclSampleTemperatureSensor_Humidity_MeasuredValue = zclSampleTemperatureSensor_Humidity_MaxMeasuredValue;
+    }
+    else if ( zclSampleTemperatureSensor_Humidity_MeasuredValue < zclSampleTemperatureSensor_Humidity_MinMeasuredValue )
+    {
+      zclSampleTemperatureSensor_Humidity_MeasuredValue = zclSampleTemperatureSensor_Humidity_MinMeasuredValue;
     }
     
     // Report data
-    zclSampleTemperatureSensor_ReportTemp(zclSampleTemperatureSensor_MeasuredValue);
+    zclSampleTemperatureSensor_ReportTemp(zclSampleTemperatureSensor_Temp_MeasuredValue);
+    zclSampleTemperatureSensor_ReportHumidity(zclSampleTemperatureSensor_Humidity_MeasuredValue);
 }
 
-/**
- * @fn      zclSampleTemperatureSensor_ReportTemp
- *
- * @brief   Report
- *
- * @param   None
- *
- * @return  none
- */
-static void zclSampleTemperatureSensor_ReportTemp(int16 tempVal)
+static void zclSampleTemperatureSensor_Report(int16 tempVal, uint16 clusterID)
 {
     static uint8 seqNum = 0;
     
@@ -794,19 +811,39 @@ static void zclSampleTemperatureSensor_ReportTemp(int16 tempVal)
     
     zcl_SendReportCmd( SAMPLETEMPERATURESENSOR_ENDPOINT, 
                        &destAddr,
-                       ZCL_CLUSTER_ID_MS_TEMPERATURE_MEASUREMENT, 
+                       clusterID, 
                        reportCmd,
-                       ZCL_FRAME_CLIENT_SERVER_DIR, 
-                       TRUE, 
+                       ZCL_FRAME_SERVER_CLIENT_DIR, 
+                       FALSE, 
                        seqNum++ );
     
-    HalLcdWriteStringValue("Report: ", tempVal, 10, 4);
+    // HalLcdWriteStringValue("Report: ", tempVal, 10, 3);
     
     osal_mem_free(reportCmd->attrList[0].attrData);
     osal_mem_free(reportCmd);
 }
-#endif
 
+/**
+ * @fn      zclSampleTemperatureSensor_ReportTemp
+ *
+ * @brief   Report
+ *
+ * @param   None
+ *
+ * @return  none
+ */
+static void zclSampleTemperatureSensor_ReportTemp(int16 tempVal)
+{
+  zclSampleTemperatureSensor_Report(tempVal, ZCL_CLUSTER_ID_MS_TEMPERATURE_MEASUREMENT);
+  HalLcdWriteStringValue("Report Temp:", tempVal, 10, 3);
+}
+
+static void zclSampleTemperatureSensor_ReportHumidity(int16 tempVal)
+{
+  zclSampleTemperatureSensor_Report(tempVal, ZCL_CLUSTER_ID_MS_RELATIVE_HUMIDITY);
+  HalLcdWriteStringValue("Report Humi:", tempVal, 10, 4);
+}
+#endif /* ZDO_COORDINATOR */
 
 /****************************************************************************
 ****************************************************************************/

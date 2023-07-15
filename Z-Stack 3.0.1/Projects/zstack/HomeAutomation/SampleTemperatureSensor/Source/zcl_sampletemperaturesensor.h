@@ -23,7 +23,7 @@
   its documentation for any purpose.
 
   YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
-  PROVIDED “AS IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+  PROVIDED ï¿½AS IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
   INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
   NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
   TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
@@ -54,7 +54,7 @@ extern "C"
 /*********************************************************************
  * CONSTANTS
  */
-#define SAMPLETEMPERATURESENSOR_ENDPOINT            8 
+#define SAMPLETEMPERATURESENSOR_ENDPOINT            1 
 
 // Application Events
 #define SAMPLETEMPERATURESENSOR_TEMP_SEND_EVT       0x0001
@@ -93,9 +93,15 @@ extern uint8  zclSampleTemperatureSensor_OnOff;
 extern uint16 zclSampleTemperatureSensor_IdentifyTime;
 
 // Temperature Measurement Cluster
-extern int16 zclSampleTemperatureSensor_MeasuredValue;
-extern const int16 zclSampleTemperatureSensor_MinMeasuredValue;
-extern const uint16 zclSampleTemperatureSensor_MaxMeasuredValue;
+extern int16 zclSampleTemperatureSensor_Temp_MeasuredValue;
+extern const int16 zclSampleTemperatureSensor_Temp_MinMeasuredValue;
+extern const int16 zclSampleTemperatureSensor_Temp_MaxMeasuredValue;
+
+// Humidity Measurement Cluster
+extern int16 zclSampleTemperatureSensor_Humidity_MeasuredValue;
+extern const int16 zclSampleTemperatureSensor_Humidity_MinMeasuredValue;
+extern const int16 zclSampleTemperatureSensor_Humidity_MaxMeasuredValue;
+
 
 /*********************************************************************
  * FUNCTIONS

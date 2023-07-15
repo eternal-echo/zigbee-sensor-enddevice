@@ -63,10 +63,15 @@
 #define SAMPLETEMPERATURESENSOR_HWVERSION          1
 #define SAMPLETEMPERATURESENSOR_ZCLVERSION         1
 
-#define SAMPLETEMPERATURESENSOR_MAX_MEASURED_VALUE  5000  // 50.00C
-#define SAMPLETEMPERATURESENSOR_MIN_MEASURED_VALUE  0100  // 1.00C
+#define TEMPERATURE_MAX_MEASURED_VALUE  5000  // 50.00C
+#define TEMPERATURE_MIN_MEASURED_VALUE  0100  // 1.00C
 
-#define SAMPLETEMPERATURESENSOR_MEASURED_VALUE      0000  // 00.00C
+#define TEMPERATURE_MEASURED_VALUE      0000  // 00.00C
+
+#define HUMIDITY_MAX_MEASURED_VALUE     10000 // 100.00%
+#define HUMIDITY_MIN_MEASURED_VALUE     00000 // 0.00%
+
+#define HUMIDITY_MEASURED_VALUE         00000 // 0.00%
 
 /*********************************************************************
  * TYPEDEFS
@@ -87,8 +92,8 @@ const uint16 zclSampleTemperatureSensor_clusterRevision_all = 0x0001;
 const uint8 zclSampleTemperatureSensor_HWRevision = SAMPLETEMPERATURESENSOR_HWVERSION;
 const uint8 zclSampleTemperatureSensor_ZCLVersion = SAMPLETEMPERATURESENSOR_ZCLVERSION;
 const uint8 zclSampleTemperatureSensor_ManufacturerName[] = { 16, 'T','e','x','a','s','I','n','s','t','r','u','m','e','n','t','s' };
-const uint8 zclSampleTemperatureSensor_ModelId[] = { 16, 'T','I','0','0','0','1',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ' };
-const uint8 zclSampleTemperatureSensor_DateCode[] = { 16, '2','0','0','6','0','8','3','1',' ',' ',' ',' ',' ',' ',' ',' ' };
+const uint8 zclSampleTemperatureSensor_ModelId[] = { 16, 'T','I','0','0','0','2',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ' };
+const uint8 zclSampleTemperatureSensor_DateCode[] = { 16, '2','0','2','3','0','7','1','0',' ',' ',' ',' ',' ',' ',' ',' ' };
 const uint8 zclSampleTemperatureSensor_PowerSource = POWER_SOURCE_MAINS_1_PHASE;
 
 uint8 zclSampleTemperatureSensor_LocationDescription[17];
@@ -99,9 +104,14 @@ uint8 zclSampleTemperatureSensor_DeviceEnable;
 uint16 zclSampleTemperatureSensor_IdentifyTime;
 
 // Temperature Sensor Cluster
-int16 zclSampleTemperatureSensor_MeasuredValue;
-const int16 zclSampleTemperatureSensor_MinMeasuredValue = SAMPLETEMPERATURESENSOR_MIN_MEASURED_VALUE; 
-const uint16 zclSampleTemperatureSensor_MaxMeasuredValue = SAMPLETEMPERATURESENSOR_MAX_MEASURED_VALUE;
+int16 zclSampleTemperatureSensor_Temp_MeasuredValue;
+const int16 zclSampleTemperatureSensor_Temp_MinMeasuredValue = TEMPERATURE_MIN_MEASURED_VALUE; 
+const int16 zclSampleTemperatureSensor_Temp_MaxMeasuredValue = TEMPERATURE_MAX_MEASURED_VALUE;
+
+// Relative Humidity
+int16 zclSampleTemperatureSensor_Humidity_MeasuredValue;
+const int16 zclSampleTemperatureSensor_Humidity_MinMeasuredValue = HUMIDITY_MIN_MEASURED_VALUE;
+const int16 zclSampleTemperatureSensor_Humidity_MaxMeasuredValue = HUMIDITY_MAX_MEASURED_VALUE;
 
 /*********************************************************************
  * ATTRIBUTE DEFINITIONS - Uses REAL cluster IDs
@@ -230,7 +240,7 @@ CONST zclAttrRec_t zclSampleTemperatureSensor_Attrs[] =
       ATTRID_MS_TEMPERATURE_MEASURED_VALUE,
       ZCL_DATATYPE_INT16,
       ACCESS_CONTROL_READ | ACCESS_REPORTABLE,
-      (void *)&zclSampleTemperatureSensor_MeasuredValue
+      (void *)&zclSampleTemperatureSensor_Temp_MeasuredValue
     }
   },
   {
@@ -239,7 +249,7 @@ CONST zclAttrRec_t zclSampleTemperatureSensor_Attrs[] =
       ATTRID_MS_TEMPERATURE_MIN_MEASURED_VALUE,
       ZCL_DATATYPE_INT16,
       ACCESS_CONTROL_READ,
-      (void *)&zclSampleTemperatureSensor_MinMeasuredValue
+      (void *)&zclSampleTemperatureSensor_Temp_MinMeasuredValue
     }
   },
   {
@@ -248,7 +258,7 @@ CONST zclAttrRec_t zclSampleTemperatureSensor_Attrs[] =
       ATTRID_MS_TEMPERATURE_MAX_MEASURED_VALUE,
       ZCL_DATATYPE_INT16,
       ACCESS_CONTROL_READ,
-      (void *)&zclSampleTemperatureSensor_MaxMeasuredValue
+      (void *)&zclSampleTemperatureSensor_Temp_MaxMeasuredValue
     }
   },
 
@@ -261,6 +271,16 @@ CONST zclAttrRec_t zclSampleTemperatureSensor_Attrs[] =
       (void *)&zclSampleTemperatureSensor_clusterRevision_all
     }
   },
+  {
+    // 相对湿度
+    ZCL_CLUSTER_ID_MS_RELATIVE_HUMIDITY,
+    { // Attribute record
+      ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE,
+      ZCL_DATATYPE_INT16,
+      ACCESS_CONTROL_READ | ACCESS_REPORTABLE,
+      (void *)&zclSampleTemperatureSensor_Humidity_MeasuredValue
+    }
+  },
 };
 
 uint8 CONST zclSampleTemperatureSensor_NumAttributes = ( sizeof(zclSampleTemperatureSensor_Attrs) / sizeof(zclSampleTemperatureSensor_Attrs[0]) );
@@ -270,12 +290,13 @@ uint8 CONST zclSampleTemperatureSensor_NumAttributes = ( sizeof(zclSampleTempera
  */
 // This is the Cluster ID List and should be filled with Application
 // specific cluster IDs.
-#define ZCLSAMPLETEMPERATURESENSOR_MAX_INCLUSTERS       3
+#define ZCLSAMPLETEMPERATURESENSOR_MAX_INCLUSTERS       4
 const cId_t zclSampleTemperatureSensor_InClusterList[ZCLSAMPLETEMPERATURESENSOR_MAX_INCLUSTERS] =
 {
   ZCL_CLUSTER_ID_GEN_BASIC,
   ZCL_CLUSTER_ID_GEN_IDENTIFY,
-  ZCL_CLUSTER_ID_MS_TEMPERATURE_MEASUREMENT
+  ZCL_CLUSTER_ID_MS_TEMPERATURE_MEASUREMENT,
+  ZCL_CLUSTER_ID_MS_RELATIVE_HUMIDITY,
 };
 
 #define ZCLSAMPLETEMPERATURESENSOR_MAX_OUTCLUSTERS       1
@@ -306,7 +327,7 @@ SimpleDescriptionFormat_t zclSampleTemperatureSensor_SimpleDesc =
  */
 
 /*********************************************************************
- * @fn      zclSampleLight_ResetAttributesToDefaultValues
+ * @fn      zclSampleTemperatureSensor_ResetAttributesToDefaultValues
  *
  * @brief   Reset all writable attributes to their default values.
  *
@@ -331,8 +352,11 @@ void zclSampleTemperatureSensor_ResetAttributesToDefaultValues(void)
   zclSampleTemperatureSensor_IdentifyTime = 0;
 #endif
   
-  zclSampleTemperatureSensor_MeasuredValue = SAMPLETEMPERATURESENSOR_MEASURED_VALUE;
+  zclSampleTemperatureSensor_Temp_MeasuredValue = TEMPERATURE_MEASURED_VALUE;
+
+  zclSampleTemperatureSensor_Humidity_MeasuredValue = HUMIDITY_MEASURED_VALUE;
 }
+
 
 /****************************************************************************
 ****************************************************************************/
