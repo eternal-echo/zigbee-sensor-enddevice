@@ -12,7 +12,7 @@
         <ByteLimit>50</ByteLimit>
     </Stack>
     <DebugChecksum>
-        <Checksum>3527734921</Checksum>
+        <Checksum>597410159</Checksum>
     </DebugChecksum>
     <CallStack>
         <ShowArgs>0</ShowArgs>
@@ -20,24 +20,48 @@
     <Disassembly>
         <MixedMode>1</MixedMode>
     </Disassembly>
+    <TermIOLog>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+    </TermIOLog>
     <LogFile>
         <LoggingEnabled>_ 0</LoggingEnabled>
         <LogFile>_ ""</LogFile>
         <Category>_ 0</Category>
     </LogFile>
-    <TermIOLog>
-        <LoggingEnabled>_ 0</LoggingEnabled>
-        <LogFile>_ ""</LogFile>
-    </TermIOLog>
     <Breakpoints>
-        <Count>0</Count>
+        <Bp0>_ "STD_CODE" "{$PROJ_DIR$\..\Source\zcl_sampletemperaturesensor.c}.794.5" 0 0 0 0 "" 0 ""</Bp0>
+        <Bp1>_ "STD_CODE" "{D:\Workspace\project\postgraduate\monitor\Firmware\zigbee-module\Z-Stack 3.0.1\Components\stack\bdb\bdb_Reporting.c}.541.7" 1 0 0 0 "" 0 ""</Bp1>
+        <Bp2>_ "STD_CODE" "{D:\Workspace\project\postgraduate\monitor\Firmware\zigbee-module\Z-Stack 3.0.1\Components\stack\bdb\bdb_Reporting.c}.536.11" 1 0 0 0 "" 0 ""</Bp2>
+        <Bp3>_ "STD_CODE" "{D:\Workspace\project\postgraduate\monitor\Firmware\zigbee-module\Z-Stack 3.0.1\Components\stack\bdb}.287.3" 0 0 0 0 "" 0 ""</Bp3>
+        <Bp4>_ "STD_CODE" "{D:\Workspace\project\postgraduate\monitor\Firmware\zigbee-module\Z-Stack 3.0.1\Components\stack\bdb}.287.3" 0 0 0 0 "" 0 ""</Bp4>
+        <Bp5>_ "STD_CODE" "{D:\Workspace\project\postgraduate\monitor\Firmware\zigbee-module\Z-Stack 3.0.1\Components\stack\bdb}.290.3" 0 0 0 0 "" 0 ""</Bp5>
+        <Bp6>_ "STD_CODE" "{D:\Workspace\project\postgraduate\monitor\Firmware\zigbee-module\Z-Stack 3.0.1\Components\stack\bdb}.290.3" 0 0 0 0 "" 0 ""</Bp6>
+        <Bp7>_ "STD_CODE" "{D:\Workspace\project\postgraduate\monitor\Firmware\zigbee-module\Z-Stack 3.0.1\Components\stack\bdb}.290.3" 0 0 0 0 "" 0 ""</Bp7>
+        <Bp8>_ "STD_CODE" "{D:\Workspace\project\postgraduate\monitor\Firmware\zigbee-module\Z-Stack 3.0.1\Components\stack\bdb}.290.3" 0 0 0 0 "" 0 ""</Bp8>
+        <Bp9>_ "STD_CODE" "{D:\Workspace\project\postgraduate\monitor\Firmware\zigbee-module\Z-Stack 3.0.1\Components\stack\bdb\bdb_Reporting.c}.2095.22" 1 0 0 0 "" 0 ""</Bp9>
+        <Bp10>_ "STD_CODE" "{D:\Workspace\project\postgraduate\monitor\Firmware\zigbee-module\Z-Stack 3.0.1\Components\stack\bdb}.290.3" 0 0 0 0 "" 0 ""</Bp10>
+        <Bp11>_ "STD_CODE" "{$PROJ_DIR$\..\Source\zcl_sampletemperaturesensor.c}.298.1" 0 0 0 0 "" 0 ""</Bp11>
+        <Bp12>_ "STD_CODE" "{$PROJ_DIR$\..\Source\zcl_sampletemperaturesensor.c}.298.1" 0 0 0 0 "" 0 ""</Bp12>
+        <Bp13>_ "STD_CODE" "{$PROJ_DIR$\..\Source\zcl_sampletemperaturesensor.c}.298.1" 0 0 0 0 "" 0 ""</Bp13>
+        <Bp14>_ "STD_CODE" "{$PROJ_DIR$\..\Source\zcl_sampletemperaturesensor.c}.298.1" 0 0 0 0 "" 0 ""</Bp14>
+        <Bp15>_ "STD_CODE" "{$PROJ_DIR$\..\Source\zcl_sampletemperaturesensor.c}.298.1" 0 0 0 0 "" 0 ""</Bp15>
+        <Bp16>_ "STD_CODE" "{$PROJ_DIR$\..\Source\zcl_sampletemperaturesensor.c}.298.1" 0 0 0 0 "" 0 ""</Bp16>
+        <Bp17>_ "STD_CODE" "{$PROJ_DIR$\..\Source\zcl_sampletemperaturesensor.c}.298.1" 0 0 0 0 "" 0 ""</Bp17>
+        <Bp18>_ "STD_CODE" "{$PROJ_DIR$\..\Source\zcl_sampletemperaturesensor.c}.298.1" 0 0 0 0 "" 0 ""</Bp18>
+        <Bp19>_ "STD_CODE" "{$PROJ_DIR$\..\Source\zcl_sampletemperaturesensor.c}.298.1" 0 0 0 0 "" 0 ""</Bp19>
+        <Bp20>_ "STD_CODE" "{$PROJ_DIR$\..\Source\zcl_sampletemperaturesensor.c}.298.1" 0 0 0 0 "" 0 ""</Bp20>
+        <Bp21>_ "STD_CODE" "{$PROJ_DIR$\..\Source\zcl_sampletemperaturesensor.c}.298.11" 0 0 0 0 "" 0 ""</Bp21>
+        <Count>22</Count>
     </Breakpoints>
     <ChipconEmu>
         <StopTimersOnHalt>0</StopTimersOnHalt>
         <LeaveTargetRunning>1</LeaveTargetRunning>
     </ChipconEmu>
     <Aliases>
-        <Count>0</Count>
+        <A0>_ "D:\embeded\project\postgraduate\monitor\Firmware\zigbee-module\Z-Stack 3.0.1\Components\mac\low_level\srf04\single_chip\mac_csp_tx.c" "D:\Workspace\project\postgraduate\monitor\Firmware\zigbee-module\Z-Stack 3.0.1\Components\mac\low_level\srf05\single_chip\mac_csp_tx.c"</A0>
+        <A1>_ "D:\embeded\project\postgraduate\monitor\Firmware\zigbee-module\Z-Stack 3.0.1\Projects\zstack\ZMain\TI2530DB\ZMain.c" ""</A1>
+        <Count>2</Count>
         <SuppressDialog>0</SuppressDialog>
     </Aliases>
 </settings>
