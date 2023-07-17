@@ -727,7 +727,7 @@
                     <item>attrDefaultCfgRecordLinkedList</item>
                     <item>epCur</item>
                     <item>i</item>
-                    <item></item>
+                    <item />
                 </expressions>
                 <col-names>
                     <item>Expression</item>
