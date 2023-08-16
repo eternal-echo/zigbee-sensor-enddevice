@@ -20,8 +20,8 @@ CC2530是一款常用的Zigbee开发板，具有出色的性能和灵活性。�
    - CC2530开发板：我们可以从善学坊的[Zigbee开发板](https://m.tb.cn/h.5Y9Qd5L?tk=6u6jdGY2rsT)获取与本教程所用硬件相符的开发板。
    - DHT11传感器：DHT11是一款常用的数字温湿度传感器，可测量周围环境的温度和湿度。请确保我们已获得可靠的DHT11传感器。
 - OLED屏幕（可选）：OLED显示屏可以用于显示温湿度等传感器数据，提供更直观的信息展示。我们可以在善学坊的[Zigbee开发板](https://m.tb.cn/h.5Y9Qd5L?tk=6u6jdGY2rsT)中获取与开发板相匹配的OLED屏幕。
-3. 配置ZStack中的Home Automation的TemperatureSensor例程
-   - ZStack中提供了一个名为Home Automation的示例代码，其中包含了SampleTemperatureSensor例程，可作为我们的参考实现。我们可以通过以下链接获取ZStack的文档和示例代码：[ZStack文档和示例代码](https://www.ti.com.cn/tool/download/Z-STACK-GUI)
+3. 配置ZStack中的Home Automation的**TemperatureSensor**例程
+   - ZStack中提供了一个名为**Home Automation**的示例代码，其中包含了**SampleTemperatureSensor**例程，可作为我们的参考实现。我们可以通过以下链接获取ZStack的文档和示例代码：[ZStack文档和示例代码](https://www.ti.com.cn/tool/download/Z-STACK-GUI)
    - Home Automation的示例代码，其中包含了SampleTemperatureSensor例程，可作为我们的参考实现。您可以通过以下链接获取ZStack的文档和示例代码：[ZStack文档和示例代码](https://www.ti.com.cn/tool/download/Z-STACK-GUI)。善学坊的`TemperatureSensor工程源码分析`对官方的例程进行了适配，包括了开发板引脚的配置以及OLED和DHT11的驱动编写。您可以直接使用这个适配好的例程进行开发，因为CC2530的引脚相关的配置较为繁琐，为了确保成功率，我们推荐使用具备例程的开发板。
 
 ### 协调器准备
